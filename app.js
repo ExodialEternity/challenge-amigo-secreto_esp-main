@@ -1,0 +1,55 @@
+// El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
+
+let listaAmigos = [];
+let usuarioIngresado;
+let indexListaAmigo = null;
+
+
+function agregarAmigo() {
+    
+    if (document.getElementById("amigo").value == ""){
+        alert("Porfavor, inserte un nombre")
+    } else {
+        
+        usuarioIngresado = document.getElementById("amigo").value;
+        listaAmigos.push(usuarioIngresado);
+        let tamanioActualLista = listaAmigos[listaAmigos.length - 1];
+        //console.log(listaAmigos[listaAmigos.length - 1]);
+        let elementoLista = document.createElement("li");
+        let llamadoALista = document.getElementById("listaAmigos");
+        elementoLista.textContent = usuarioIngresado;
+        llamadoALista.appendChild(elementoLista);
+        //llamadoALista.innerHTML += `<li>${tamanioActualLista}</li>`; //manera incorrecta de modificar el DOM en HTML 
+        limpiarCampo();
+        cambiarContenidoResultado("")
+        
+    }
+    return;
+}
+
+function limpiarCampo() {
+    document.getElementById("amigo").value = "";
+    return;
+}
+
+function sortearAmigo() {
+    let amigoSorteado = parseInt(Math.random()*listaAmigos.length);
+    indexListaAmigo = listaAmigos[amigoSorteado];
+    MostrarAmigoSorteado();
+    return;
+}
+
+function cambiarContenidoResultado(valor) {
+    let contenidoResultado = document.getElementById("resultado");
+    contenidoResultado.textContent = valor;
+}
+
+function MostrarAmigoSorteado() {
+    while (document.querySelector("#listaAmigos").childElementCount > 0 ){
+    let removerLista = document.querySelector("#listaAmigos > li");
+    removerLista.remove();
+    }
+    listaAmigos = [];
+    cambiarContenidoResultado(`Su amigo secreto es ${indexListaAmigo}`)
+    return;
+}
