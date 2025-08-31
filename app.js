@@ -19,7 +19,7 @@ function agregarAmigo() {
         let llamadoALista = document.getElementById("listaAmigos");
         elementoLista.textContent = usuarioIngresado;
         llamadoALista.appendChild(elementoLista);
-        //llamadoALista.innerHTML += `<li>${tamanioActualLista}</li>`; //manera incorrecta de modificar el DOM en HTML 
+        //llamadoALista.innerHTML += `<li>${tamanioActualLista}</li>`; //manera incorrecta de modificar el DOM en HTML ya que pueden inyectar código malicioso en tu página
         limpiarCampo();
         cambiarContenidoResultado("")
         
@@ -42,14 +42,20 @@ function sortearAmigo() {
 function cambiarContenidoResultado(valor) {
     let contenidoResultado = document.getElementById("resultado");
     contenidoResultado.textContent = valor;
+    return;
 }
 
 function MostrarAmigoSorteado() {
-    while (document.querySelector("#listaAmigos").childElementCount > 0 ){
-    let removerLista = document.querySelector("#listaAmigos > li");
-    removerLista.remove();
-    }
-    listaAmigos = [];
-    cambiarContenidoResultado(`Su amigo secreto es ${indexListaAmigo}`)
+    if (listaAmigos.length == 0){
+        cambiarContenidoResultado("Ingrese un amigo primero")
+        } else {
+            while (document.querySelector("#listaAmigos").childElementCount > 0 ){
+            let removerLista = document.querySelector("#listaAmigos > li");
+            removerLista.remove();
+            }
+            listaAmigos = [];
+            limpiarCampo();
+            cambiarContenidoResultado(`Su amigo secreto es ${indexListaAmigo}`)
+        }
     return;
 }
