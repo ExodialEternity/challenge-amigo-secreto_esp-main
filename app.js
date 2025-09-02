@@ -1,19 +1,21 @@
 // El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
 
 let listaAmigos = [];
-let usuarioIngresado;
+let usuarioIngresado = null;
 let indexListaAmigo = null;
-
+const regex = /\W|\d/;
 
 function agregarAmigo() {
+    if (document.getElementById("amigo").value == "" || regex.test(document.getElementById("amigo").value)) {
+        alert(`${document.getElementById("amigo").value == "" ? "Por favor, inserte un nombre." : "No ingrese caracteres especiales, números o acentos."}`);
+        limpiarCampo();
     
-    if (document.getElementById("amigo").value == ""){
-        alert("Porfavor, inserte un nombre")
-    } else {
+    } 
+    else {
         
         usuarioIngresado = document.getElementById("amigo").value;
         listaAmigos.push(usuarioIngresado);
-        let tamanioActualLista = listaAmigos[listaAmigos.length - 1];
+        //let tamanioActualLista = listaAmigos[listaAmigos.length - 1];
         //console.log(listaAmigos[listaAmigos.length - 1]);
         let elementoLista = document.createElement("li");
         let llamadoALista = document.getElementById("listaAmigos");
